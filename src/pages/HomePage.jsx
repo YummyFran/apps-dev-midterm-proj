@@ -3,6 +3,8 @@ import Nav from '../components/Nav'
 import Hero from '../components/Hero'
 import Categories from '../components/Categories'
 import Arrival from '../components/Arrival'
+import Footer from '../components/Footer'
+import CTA from '../components/CTA'
 
 const HomePage = () => {
   return (
@@ -11,6 +13,8 @@ const HomePage = () => {
         <Hero />
         <Categories />
         <Arrival />
+        <CTA />
+        <Footer />
     </div>
   )
 }

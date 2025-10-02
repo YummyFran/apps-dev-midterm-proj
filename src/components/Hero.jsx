@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Hero = () => {
   return (
@@ -6,7 +8,10 @@ const Hero = () => {
         <div className="h-[90%] rounded-lg overflow-hidden relative shadow-lg">
             <img src="/assets/hero.jpg" alt="hero" />
 
-            <div className="absolute text-white text-[5rem] font-mono top-[50%] right-20 translate-y-[-50%]">Simple is More</div>
+            <div className="absolute text-white top-[50%] right-20 translate-y-[-50%] flex flex-col">
+                <div className='text-[5rem] font-mono'>Simple is More</div>
+                <Link to={'/browse'} className='hover:underline self-end flex gap-2 items-center'>Browse products <FaArrowRightLong /></Link>
+            </div>
         </div>
     </div>
   )

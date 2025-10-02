@@ -17,7 +17,7 @@ const Arrival = () => {
             {
                 arrivals?.products ? 
                     arrivals?.products.map(product => (
-                        <ProductCard product={product} key={product.id}/>
+                        <ProductCard product={product} key={product.id} className={'flex-1'}/>
                     ))
                 :
                     Array(4).fill('').map((_, i)=> (
