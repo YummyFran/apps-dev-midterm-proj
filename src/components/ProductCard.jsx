@@ -3,7 +3,7 @@ import React from 'react'
 const ProductCard = ({ product, className }) => {
 
   return (
-    <div className={`shadow-lg rounded-lg basis-50 ${className}`}>
+    <div className={`shadow-lg rounded-lg basis-50 ${className} flex-1`}>
         <div className='bg-gray-200 rounded-lg aspect-[7/9]'>
             <img src={product?.thumbnail} alt={product?.name} className='h-full w-full object-cover'/>
         </div>

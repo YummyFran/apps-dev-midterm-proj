@@ -50,21 +50,27 @@ function buildQueryString(filters = {}) {
   return str ? `?${str}` : "";
 }
 
+/*
+    filters {
+        q: seearch query.
+        category: catergory sa product,
+        limit,
+        skip, 
+        select, 
+        sortBy, 
+        order
+    }
+*/
 export async function fetchProducts(filters = {}) {
-  const BASE = "https://dummyjson.com/products";
+  let BASE = "https://dummyjson.com/products";
   let url = BASE;
 
-  // If there's a search query, use the search endpoint
   if (filters.q) {
-    // e.g. https://dummyjson.com/products/search?q=phone
     url = `${BASE}/search`;
   } else if (filters.category) {
-    // Use the category endpoint if category filter present
-    // e.g. https://dummyjson.com/products/category/{category}
     url = `${BASE}/category/${encodeURIComponent(filters.category)}`;
   }
 
-  // Build the query string (limit, skip, select, sortBy, order)
   const qs = buildQueryString(filters);
 
   // For search, we need to add q separately
@@ -75,7 +81,8 @@ export async function fetchProducts(filters = {}) {
     url += qs;
   }
 
-  // Now perform fetch
+  console.log(url)
+
   const resp = await fetch(url);
   if (!resp.ok) {
     throw new Error(`Failed to fetch products: ${resp.status} ${resp.statusText}`);
