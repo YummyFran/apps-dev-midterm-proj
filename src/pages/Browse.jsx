@@ -17,6 +17,8 @@ const Browse = () => {
     sortBy: "",
     order: "asc",
   });
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 40_000 })
+  const [filteredProducts, setFilteredProducts] = useState([])
 
   const {
     data: products,
@@ -58,15 +60,31 @@ const Browse = () => {
     };
   }, [fetchNextPage]);
 
+  useEffect(() => {
+    if(!products) return
+
+    setFilteredProducts(products)
+  }, [products])
+
+  useEffect(() => {
+    const fil = products?.pages.map(page => {
+        return  { ...page, products: page.products.filter(val => val.price > priceRange.min && val.price < priceRange.max) }
+    })
+
+    setFilteredProducts({ ...products, pages: fil })
+
+    console.log(priceRange)
+  }, [priceRange])
+
   return (
     <div>
       <Nav />
       <section className="px-[2rem] lg:px-[10rem] flex gap-6 pb-10">
         <aside className="w-75 hidden lg:block">
-          <ProductFilters filters={filters} setFilters={setFilters}/>
+          <ProductFilters filters={filters} setFilters={setFilters} priceRange={priceRange} setPriceRange={setPriceRange} />
         </aside>
         <main className="flex-1">
-          <Products products={products} isFetchingNextPage={isFetchingNextPage} setFilters={setFilters}/>
+          <Products products={filteredProducts} isFetchingNextPage={isFetchingNextPage} setFilters={setFilters}/>
         </main>
       </section>
     </div>

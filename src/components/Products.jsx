@@ -1,6 +1,7 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 import { BiLoaderAlt, BiSortAlt2 } from "react-icons/bi";
+import Loading from "./Loading";
 
 
 const Products = ({ products, isFetchingNextPage, setFilters }) => {
@@ -23,17 +24,13 @@ const Products = ({ products, isFetchingNextPage, setFilters }) => {
                 xl:grid-cols-3
                 2xl:grid-cols-4"
       >
-        {products?.pages.flatMap((page) =>
+        {products?.pages?.flatMap((page) =>
           page.products.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))
         )}
       </div>
-      {isFetchingNextPage && (
-        <div className="flex justify-center py-[5rem] text-4xl text-gray-400 animate-spin">
-          <BiLoaderAlt />
-        </div>
-      )}
+      {isFetchingNextPage && <Loading />}
     </>
   );
 };

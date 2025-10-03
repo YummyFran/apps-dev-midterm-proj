@@ -118,3 +118,49 @@
     @apply bg-background text-foreground;
   }
 }
+
+#range-slider {
+  height: 0.2rem;
+}
+
+#range-slider .range-slider__thumb {
+    width: 1rem;
+    height: 1rem;
+    border: 3px solid #fff;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 2px black;
+    background-color: black;
+}
+
+#range-slider .range-slider__range {
+    background: black;
+    background-size: 200% 100%;
+    background-position: 50% 0;
+}
+
+#range-slider .range-slider__range[data-active],
+#range-slider .range-slider__thumb[data-active]~.range-slider__range {
+    animation: move-bg .75s infinite linear;
+}
+
+@keyframes move-bg {
+    0% {
+        background-position: 50% 0;
+    }
+
+    25% {
+        background-position: 100% 0;
+    }
+
+    50% {
+        background-position: 50% 0;
+    }
+
+    75% {
+        background-position: 0% 0;
+    }
+
+    100% {
+        background-position: 50% 0;
+    }
+} 
