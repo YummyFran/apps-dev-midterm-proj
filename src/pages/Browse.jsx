@@ -4,6 +4,8 @@ import { fetchProducts } from "../lib/productsService";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ProductCard from "../components/ProductCard";
 import { BiLoaderAlt } from "react-icons/bi";
+import Products from "../components/Products";
+import ProductFilters from "../components/ProductFilters";
 
 const Browse = () => {
   const [filters, setFilters] = useState({
@@ -13,7 +15,7 @@ const Browse = () => {
     skip: "",
     select: "",
     sortBy: "",
-    order: "",
+    order: "asc",
   });
 
   const {
@@ -21,6 +23,7 @@ const Browse = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    refetch
   } = useInfiniteQuery({
     queryKey: ["products", filters],
     queryFn: async ({ pageParam = 0 }) =>
@@ -43,7 +46,6 @@ const Browse = () => {
         const fullHeight = document.documentElement.scrollHeight;
 
         if (scrollTop + windowHeight >= fullHeight - 100) {
-          console.log("yes");
           fetchNextPage();
         }
       }, 200);
@@ -59,22 +61,12 @@ const Browse = () => {
   return (
     <div>
       <Nav />
-      <section className="px-[2rem] lg:px-[10rem] flex gap-2 pb-10">
-        <aside className="w-75">Side</aside>
+      <section className="px-[2rem] lg:px-[10rem] flex gap-6 pb-10">
+        <aside className="w-75 hidden lg:block">
+          <ProductFilters filters={filters} setFilters={setFilters}/>
+        </aside>
         <main className="flex-1">
-            <h2 className="text-xl font-bold py-6">Browse Products</h2>
-          <div className="flex flex-wrap gap-3">
-            {products?.pages.flatMap((page) =>
-              page.products.map((product) => (
-                <ProductCard product={product} key={product.id} />
-              ))
-            )}
-          </div>
-          {isFetchingNextPage && (
-            <div className="flex justify-center py-5 text-4xl text-gray-400 animate-spin">
-              <BiLoaderAlt />
-            </div>
-          )}
+          <Products products={products} isFetchingNextPage={isFetchingNextPage} setFilters={setFilters}/>
         </main>
       </section>
     </div>

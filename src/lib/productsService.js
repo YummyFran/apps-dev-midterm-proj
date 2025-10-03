@@ -25,69 +25,40 @@ export const getRandomProducts = async (n = 4) => {
   return data;
 };
 
-/**
- * filters object supports:
- *  - limit (number)
- *  - skip (number)
- *  - select (string) — comma-separated fields
- *  - category (string)
- *  - q (string) — search
- *  - sortBy (string)
- *  - order (string: "asc" or "desc")
- */
-function buildQueryString(filters = {}) {
-  const params = new URLSearchParams();
+function buildQueryString(params) {
+  const query = new URLSearchParams(
+    Object.entries(params).filter(([k]) => k !== "q" && k !== "category")
+  ).toString();
 
-  if (filters.limit != null) params.append("limit", filters.limit);
-  if (filters.skip != null) params.append("skip", filters.skip);
-  if (filters.select) params.append("select", filters.select);
-  if (filters.sortBy) params.append("sortBy", filters.sortBy);
-  if (filters.order) params.append("order", filters.order);
-  // Note: `q` is used for the “search” endpoint, so we’ll handle that later
-  // We don't append category here since category is part of path in docs
-
-  const str = params.toString();
-  return str ? `?${str}` : "";
+  return query ? `?${query}` : "";
 }
 
-/*
-    filters {
-        q: seearch query.
-        category: catergory sa product,
-        limit,
-        skip, 
-        select, 
-        sortBy, 
-        order
-    }
-*/
 export async function fetchProducts(filters = {}) {
-  let BASE = "https://dummyjson.com/products";
-  let url = BASE;
+  let endpoint = "/products";
 
   if (filters.q) {
-    url = `${BASE}/search`;
+    endpoint = "/products/search";
   } else if (filters.category) {
-    url = `${BASE}/category/${encodeURIComponent(filters.category)}`;
+    endpoint = `/products/category/${encodeURIComponent(filters.category)}`;
   }
 
   const qs = buildQueryString(filters);
 
-  // For search, we need to add q separately
   if (filters.q) {
     const prefix = qs ? "&" : "?";
-    url += `${qs}${prefix}q=${encodeURIComponent(filters.q)}`;
+    endpoint += `${qs}${prefix}q=${encodeURIComponent(filters.q)}`;
   } else {
-    url += qs;
+    endpoint += qs;
   }
 
-  console.log(url)
+  console.log(endpoint)
 
-  const resp = await fetch(url);
-  if (!resp.ok) {
-    throw new Error(`Failed to fetch products: ${resp.status} ${resp.statusText}`);
+  const [data, err] = await fetchData(endpoint);
+
+  if (err) {
+    throw new Error(`Failed to fetch products: ${err.message}`);
   }
-  const data = await resp.json();
+
   return data;
 }
 
