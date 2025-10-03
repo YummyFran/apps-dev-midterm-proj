@@ -14,7 +14,7 @@ const sortBy = [
 
 const ProductFilters = ({ filters, setFilters, priceRange, setPriceRange  }) => {
     const setCategory = (category) => {
-        setFilters(prev => ({...prev, category: category.toLowerCase() }))
+        setFilters(prev => ({...prev, category: category.toLowerCase().replace(" ", "-") }))
     }
     const setSortBy = (sort) => {
         setFilters(prev => ({...prev, sortBy: sort.toLowerCase()}))
