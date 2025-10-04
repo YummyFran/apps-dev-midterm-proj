@@ -21,7 +21,7 @@ const Cart = () => {
 
         {
           summary?.isOpen && 
-          <div className='fixed z-20 inset-0 flex justify-center items-center'>
+          <div className='fixed z-20 inset-0 flex justify-center items-center px-[2rem]'>
             <div
               className="bg-black absolute inset-0 opacity-20"
               onClick={() => setSummary(prev => ({ ...prev, isOpen: false}))}
