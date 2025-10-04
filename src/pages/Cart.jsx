@@ -21,12 +21,12 @@ const Cart = () => {
 
         {
           summary?.isOpen && 
-          <div className='fixed z-20 inset-0 flex justify-center items-center px-[2rem]'>
+          <div className='fixed z-20 inset-0 flex justify-center items-center'>
             <div
               className="bg-black absolute inset-0 opacity-20"
               onClick={() => setSummary(prev => ({ ...prev, isOpen: false}))}
             ></div>
-            <div className='bg-white relative w-full h-full top-15 lg:top-0 lg:h-[80vh] mx-0 lg:mx-[12rem] rounded-lg overflow-hidden flex flex-col items-center shadow-lg p-4'>
+            <div className='bg-white relative w-full h-full top-15 lg:top-0 lg:h-[80vh] mx-0 lg:mx-[12rem] px-[2rem] rounded-lg overflow-hidden flex flex-col items-center shadow-lg p-4'>
               <FaRegCircleCheck className='text-[10rem] mt-6 text-green-500' />
               <h2 className='font-bold text-2xl text-center py-4'>Order Successfull</h2>
               <p>You order #{Math.ceil(Math.random() * (999_999 - 100_000)) + 100_000} has been placed succesfully</p>
