@@ -33,7 +33,7 @@ const ProductPage = () => {
         </div>
 
         <div className="h-full aspect-[7/9] bg-[#76bad1] grid grid-rows-[10fr_2fr]">
-          <div className="w-full">
+          <div className="w-full p-5">
             <img
               src={product?.images[activeImage]}
               alt={product?.title}
@@ -87,7 +87,7 @@ const ProductPage = () => {
           <div className="flex-1 overflow-auto">
             <div className="grid grid-cols-[8rem_1fr] gap-y-4">
               <span className="text-gray-600">Availability</span>
-              <p className="text-sm text-gray-700 flex items-center"><span className="bg-gray-200 text-xs py-1 px-3 rounded-sm text-gray-500 mr-2">{product?.availabilityStatus}</span> {product?.stock} items in stock</p>
+              <p className={`text-sm flex items-center ${product?.stock <= 0 ? 'text-red-500' : 'text-gray-700'}`}><span className="bg-gray-200 text-xs py-1 px-3 rounded-sm text-gray-500 mr-2">{product?.availabilityStatus}</span> {product?.stock} items in stock</p>
               <span className="text-gray-600">Shipping</span>
               <p className="text-sm text-gray-700 flex items-center">{product?.shippingInformation}</p>
               <span className="text-gray-600">Warranty</span>
@@ -97,19 +97,43 @@ const ProductPage = () => {
               <span className="text-gray-600">Quantity</span>
               <div className="flex">
                 <button className="border border-gray-500 px-3 h-8 flex justify-center items-center rounded-l-md cursor-pointer" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-                <input type="number" value={quantity} onChange={e => setQuantity(e.target.value && Math.max(1, e.target.value))} className="border-y border-gray-500 field-sizing-content px-4 appearance-none [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none" />
+                <input type="number" value={product?.stock <= 0 ? 0 : quantity} onChange={e => setQuantity(e.target.value && Math.max(1, e.target.value))} className="border-y border-gray-500 field-sizing-content px-4 appearance-none [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none" />
                 <button className="border border-gray-500 px-3 h-8 flex justify-center items-center rounded-r-md cursor-pointer" onClick={() => setQuantity(quantity + 1)}>+</button>
               </div>
             </div>
           </div>
           <div className="flex gap-4">
-            <button className="bg-gray-200 py-3 px-6 rounded-md flex items-center gap-2 text-gray-700 cursor-pointer hover:shadow-sm">
-                <BsCartPlus />
-                Add to cart
+            <button className="bg-gray-200 py-3 px-6 rounded-md flex items-center gap-2 text-gray-700 cursor-pointer hover:shadow-sm disabled:opacity-60 disabled:cursor-not-allowed" disabled={product?.stock <= 0}>
+                {
+                    product?.stock > 0 ?
+                        (
+                            <>
+                                <BsCartPlus />
+                                Add to cart
+                            </>
+                        ) :
+                        (
+                            <>
+                                Out of stock
+                            </>
+                        )
+                }  
             </button>
-            <button className="bg-[#76bad1] py-3 px-6 rounded-md flex items-center gap-2 text-white cursor-pointer hover:shadow-sm">
-                <MdOutlineShoppingCartCheckout />
-                Buy for ${(product?.price * quantity).toFixed(2)}
+            <button className="bg-[#76bad1] py-3 px-6 rounded-md flex items-center gap-2 text-white cursor-pointer hover:shadow-sm disabled:opacity-60 disabled:cursor-not-allowed" disabled={product?.stock <= 0}>
+                {
+                    product?.stock > 0 ?
+                        (
+                            <>
+                                <MdOutlineShoppingCartCheckout />
+                                Buy for ${(product?.price * quantity).toFixed(2)}
+                            </>
+                        ) :
+                        (
+                            <>
+                                Out of stock
+                            </>
+                        )
+                }  
             </button>
           </div>
         </div>
