@@ -9,7 +9,6 @@ const Products = ({ products, isFetchingNextPage, setFilters }) => {
         setFilters(prev => ({ ...prev, order: prev.order == "asc" ? "desc" : "asc" }))
     }
 
-    console.log(products)
   return (
     <>
       <div className="flex justify-between items-center">

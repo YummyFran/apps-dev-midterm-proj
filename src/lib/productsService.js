@@ -51,8 +51,6 @@ export const fetchProducts = async (filters = {}) => {
     endpoint += qs;
   }
 
-  console.log(endpoint)
-
   const [data, err] = await fetchData(endpoint);
 
   if (err) {

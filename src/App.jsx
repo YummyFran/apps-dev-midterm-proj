@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Browse from './pages/Browse'
 import ProductPage from './pages/ProductPage'
+import Cart from './components/Cart'
 
 function App() {
   
@@ -13,6 +14,7 @@ function App() {
           <Route path='browse' element={<Browse />}>
             <Route path=":productId" element={<ProductPage />} />
           </Route>
+          <Route path="cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </>

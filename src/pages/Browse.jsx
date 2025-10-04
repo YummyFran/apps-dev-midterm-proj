@@ -77,7 +77,6 @@ const Browse = () => {
 
     setFilteredProducts({ ...products, pages: fil })
 
-    console.log(priceRange)
   }, [priceRange])
 
   useEffect(() => {

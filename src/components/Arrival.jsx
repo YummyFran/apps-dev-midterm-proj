@@ -9,7 +9,6 @@ const Arrival = () => {
         queryKey: ['arrivals'],
         queryFn: async () => await getRandomProducts()
     })
-    console.log(arrivals)
   return (
     <div className='px-[2rem] lg:px-[10rem] py-2'>
         <h2 className='font-bold text-2xl pb-4'>New Arrivals</h2>
