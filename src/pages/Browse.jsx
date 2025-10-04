@@ -23,6 +23,7 @@ const Browse = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const query = searchParams.get("q")
+  const cat = searchParams.get("category")
 
   const {
     data: products,

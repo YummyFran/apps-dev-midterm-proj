@@ -12,7 +12,7 @@ const Arrival = () => {
   return (
     <div className='px-[2rem] lg:px-[10rem] py-2'>
         <h2 className='font-bold text-2xl pb-4'>New Arrivals</h2>
-        <div className='flex gap-4'>
+        <div className='grid grid-cols-2 md:grid-cols-4 gap-2'>
             {
                 arrivals?.products ? 
                     arrivals?.products.map(product => (

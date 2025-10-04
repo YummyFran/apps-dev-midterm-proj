@@ -40,6 +40,8 @@ const ProductPage = () => {
         { ...product, quantity, subtotal: product.price * quantity },
       ]
     })
+
+    nav(-1)
   }
 
   return (

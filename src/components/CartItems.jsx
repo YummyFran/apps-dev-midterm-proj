@@ -24,9 +24,9 @@ const CartItems = () => {
           >
             {selected?.length > 0 && selected?.length == cart?.length && <IoCheckmark />}
           </div>
-          <label htmlFor="select-all">
+          <p onClick={() => toggleSelectAll()}>
             {selected.length}/{cart?.length} Items selected
-          </label>
+          </p>
           <button
             className="ml-auto text-gray-700 font-bold text-xs px-2 cursor-pointer hover:underline"
             onClick={() => clearCart()}
