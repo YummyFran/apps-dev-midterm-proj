@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Browse from './pages/Browse'
+import ProductPage from './pages/ProductPage'
 
 function App() {
   
@@ -9,7 +10,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<HomePage />}/>
-          <Route path='/browse' element={<Browse />}/>
+          <Route path='browse' element={<Browse />}>
+            <Route path=":productId" element={<ProductPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

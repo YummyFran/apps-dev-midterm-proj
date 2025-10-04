@@ -1,10 +1,12 @@
 import React from 'react'
 import { IoIosStar } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ product, className }) => {
+    const nav = useNavigate()
 
   return (
-    <div className={`shadow-lg rounded-lg basis-50 ${className} grow-1 h-full flex flex-col`}>
+    <div className={`shadow-lg rounded-lg basis-50 ${className} grow-1 h-full flex flex-col cursor-pointer`} onClick={() => nav(`${product.id}`)}>
         <div className='bg-gray-200 rounded-lg aspect-[1] relative'>
             <img src={product?.thumbnail} alt={product?.name} className='h-full w-full object-cover'/>
             <div className='absolute top-2 left-2 flex gap-1 items-center text-sm border border-amber-400 bg-amber-100 py-1 px-2 rounded-md'>

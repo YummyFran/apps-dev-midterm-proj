@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import { BiLoaderAlt } from "react-icons/bi";
 import Products from "../components/Products";
 import ProductFilters from "../components/ProductFilters";
+import { Outlet, useSearchParams } from "react-router-dom";
 
 const Browse = () => {
   const [filters, setFilters] = useState({
@@ -19,6 +20,9 @@ const Browse = () => {
   });
   const [priceRange, setPriceRange] = useState({ min: 0, max: 40_000 })
   const [filteredProducts, setFilteredProducts] = useState([])
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const query = searchParams.get("q")
 
   const {
     data: products,
@@ -76,9 +80,15 @@ const Browse = () => {
     console.log(priceRange)
   }, [priceRange])
 
+  useEffect(() => {
+    if(!query) return
+
+    setFilters(prev => ({ ...prev, q: query }))
+  }, [query])
+
   return (
     <div>
-      <Nav />
+      <Nav value={query}/>
       <section className="px-[2rem] lg:px-[10rem] flex gap-6 pb-10">
         <aside className="w-75 hidden lg:block">
           <ProductFilters filters={filters} setFilters={setFilters} priceRange={priceRange} setPriceRange={setPriceRange} />
@@ -87,6 +97,7 @@ const Browse = () => {
           <Products products={filteredProducts} isFetchingNextPage={isFetchingNextPage} setFilters={setFilters}/>
         </main>
       </section>
+        <Outlet />
     </div>
   );
 };

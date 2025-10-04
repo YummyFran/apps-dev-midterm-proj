@@ -25,7 +25,7 @@ export const getRandomProducts = async (n = 4) => {
   return data;
 };
 
-function buildQueryString(params) {
+const buildQueryString = (params) => {
   const query = new URLSearchParams(
     Object.entries(params).filter(([k]) => k !== "q" && k !== "category")
   ).toString();
@@ -33,7 +33,7 @@ function buildQueryString(params) {
   return query ? `?${query}` : "";
 }
 
-export async function fetchProducts(filters = {}) {
+export const fetchProducts = async (filters = {}) => {
   let endpoint = "/products";
 
   if (filters.q) {
@@ -62,3 +62,8 @@ export async function fetchProducts(filters = {}) {
   return data;
 }
 
+export const getProductById = async (id) => {
+    const [data, err] = await fetchData(`/products/${id}`)
+
+    return data
+}
