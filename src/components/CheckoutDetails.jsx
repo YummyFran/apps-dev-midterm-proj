@@ -3,10 +3,10 @@ import { useCart } from "../providers/CartContext";
 
 const DISCOUNT = 10
 
-const CheckoutDetails = () => {
+const CheckoutDetails = ({ setSummary }) => {
   const [giftCode, setGiftCode] = useState("");
   const [giftCodeStatus, setGiftCodeStatus] = useState("");
-  const { cart, selected } = useCart();
+  const { cart, selected, addToCart, setSelected } = useCart();
   const selectedSet = new Set(selected);
 
   const totalAmount = cart.filter((item) => 
@@ -16,7 +16,12 @@ const CheckoutDetails = () => {
   const calculatedAmount = totalAmount - (giftCodeStatus == "valid" ? DISCOUNT : 0)
 
   const handleCheckout = () => {
-    
+    setSelected([])
+    addToCart(prev => prev.filter(item => !selected.includes(item.id)))
+    setSummary({
+        isOpen: true,
+        items: cart.filter((item) => selectedSet.has(item.id))
+    })
   }
 
   useEffect(() => {
