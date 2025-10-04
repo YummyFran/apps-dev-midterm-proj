@@ -20,6 +20,7 @@ const Browse = () => {
   });
   const [priceRange, setPriceRange] = useState({ min: 0, max: 40_000 })
   const [filteredProducts, setFilteredProducts] = useState([])
+  const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
 
   const query = searchParams.get("q")
@@ -86,15 +87,19 @@ const Browse = () => {
     setFilters(prev => ({ ...prev, q: query }))
   }, [query])
 
+  useEffect(() => {
+    setIsFilterPanelOpen(false)
+  }, [filters])
+
   return (
     <div>
       <Nav value={query}/>
-      <section className="px-[2rem] lg:px-[10rem] flex gap-6 pb-10">
-        <aside className="w-75 hidden lg:block">
-          <ProductFilters filters={filters} setFilters={setFilters} priceRange={priceRange} setPriceRange={setPriceRange} />
+      <section className="px-[2rem] lg:px-[10rem] flex gap-6 pb-10 relative">
+        <aside className={`w-full lg:w-75 fixed px-[2rem] bg-white z-10 top-15 bottom-0 lg:static transition-all duration-75 ${isFilterPanelOpen ? 'left-0' : 'left-full'}`}>
+          <ProductFilters filters={filters} setFilters={setFilters} priceRange={priceRange} setPriceRange={setPriceRange} setIsFilterPanelOpen={setIsFilterPanelOpen} />
         </aside>
         <main className="flex-1">
-          <Products products={filteredProducts} isFetchingNextPage={isFetchingNextPage} setFilters={setFilters}/>
+          <Products products={filteredProducts} isFetchingNextPage={isFetchingNextPage} setFilters={setFilters} setIsFilterPanelOpen={setIsFilterPanelOpen}/>
         </main>
       </section>
         <Outlet />

@@ -3,6 +3,7 @@ import Select from "./Select";
 import { getCategories } from "../lib/productsService";
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
+import { BiFilterAlt } from "react-icons/bi";
 
 const sortBy = [
     { name: "Title"},
@@ -12,7 +13,7 @@ const sortBy = [
     { name: "Stock"}
 ]
 
-const ProductFilters = ({ filters, setFilters, priceRange, setPriceRange  }) => {
+const ProductFilters = ({ filters, setFilters, priceRange, setPriceRange,setIsFilterPanelOpen }) => {
     const setCategory = (category) => {
         setFilters(prev => ({...prev, category: category.toLowerCase().replace(" ", "-") }))
     }
@@ -25,7 +26,10 @@ const ProductFilters = ({ filters, setFilters, priceRange, setPriceRange  }) => 
     })
   return (
     <>
-      <h2 className="text-xl font-bold py-6">Filters</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold py-6">Filters</h2>
+        <BiFilterAlt className="text-xl text-gray-400 cursor-pointer lg:hidden" onClick={() => setIsFilterPanelOpen(prev => !prev)}/>
+      </div>
       <h3 className="text-md font-bold mb-4">Categories</h3>
       <Select setter={setCategory} options={categories} defaultOption={"All Categories"}/>
       <h3 className="text-md font-bold my-4">Sort by</h3>

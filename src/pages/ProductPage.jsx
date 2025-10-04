@@ -45,12 +45,12 @@ const ProductPage = () => {
   }
 
   return (
-    <div className="fixed z-20 inset-0 flex justify-center items-center">
+    <div className="fixed z-20 inset-0 top-15 flex justify-center items-center">
       <div
         className="bg-black absolute inset-0 opacity-20"
         onClick={() => nav(-1)}
       ></div>
-      <div className="bg-white relative w-full h-[80vh] mx-0 lg:mx-[12rem] rounded-lg overflow-hidden flex shadow-lg">
+      <div className="bg-white relative w-full h-full lg:h-[80vh] mx-0 lg:mx-[12rem] rounded-lg overflow-auto flex flex-col xl:flex-row shadow-lg">
         <div
           className="absolute top-0 right-0 text-2xl py-1 px-3 text-gray-500 cursor-pointer"
           onClick={() => nav(-1)}
@@ -59,11 +59,11 @@ const ProductPage = () => {
         </div>
 
         <div className="h-full aspect-[7/9] bg-[#76bad1] grid grid-rows-[10fr_2fr]">
-          <div className="w-full p-5">
+          <div className="h-full p-5 overflow-hidden">
             <img
               src={product?.images[activeImage]}
               alt={product?.title}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
             />
           </div>
           <div className="flex gap-2 flex-nowrap overflow-auto px-2 pb-2">

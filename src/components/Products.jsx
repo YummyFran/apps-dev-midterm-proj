@@ -1,10 +1,11 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-import { BiLoaderAlt, BiSortAlt2 } from "react-icons/bi";
+import { BiSortAlt2, BiFilterAlt  } from "react-icons/bi";
+import { CiFilter } from "react-icons/ci";
 import Loading from "./Loading";
 
 
-const Products = ({ products, isFetchingNextPage, setFilters }) => {
+const Products = ({ products, isFetchingNextPage, setFilters, setIsFilterPanelOpen }) => {
     const toggleOrder = () => {
         setFilters(prev => ({ ...prev, order: prev.order == "asc" ? "desc" : "asc" }))
     }
@@ -13,7 +14,10 @@ const Products = ({ products, isFetchingNextPage, setFilters }) => {
     <>
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold py-6">Browse Products</h2>
-        <BiSortAlt2 className="text-xl text-gray-400 cursor-pointer" onClick={toggleOrder}/>
+        <div className="flex items-center gap-2">
+            <BiSortAlt2 className="text-xl text-gray-400 cursor-pointer" onClick={toggleOrder}/>
+            <BiFilterAlt  className="text-xl text-gray-400 cursor-pointer" onClick={() => setIsFilterPanelOpen(prev => !prev)}/>
+        </div>
       </div>
       <div
         className="grid gap-6 

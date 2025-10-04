@@ -15,7 +15,7 @@ const Nav = ({ value }) => {
         nav('/browse?q=' + search)
     }
   return (
-    <div className='flex justify-between items-center px-[2rem] lg:px-[10rem] py-3 gap-2 lg:gap-12 sticky top-0 h-15 bg-white z-10'>
+    <div className='flex justify-between items-center px-[2rem] lg:px-[10rem] py-3 gap-2 lg:gap-12 sticky top-0 h-15 bg-white z-30'>
         <div className='font-bold text-xl cursor-pointer' onClick={() => nav('/')}>Shi</div>
         <div className="flex-1 border border-gray-500 rounded flex items-center pl-2 gap-2 bg-gray-50">
             <IoSearchOutline className='text-gray-500'/>

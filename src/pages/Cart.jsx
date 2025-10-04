@@ -26,7 +26,7 @@ const Cart = () => {
               className="bg-black absolute inset-0 opacity-20"
               onClick={() => setSummary(prev => ({ ...prev, isOpen: false}))}
             ></div>
-            <div className='bg-white relative w-full h-[80vh] mx-0 lg:mx-[12rem] rounded-lg overflow-hidden flex flex-col items-center shadow-lg p-4'>
+            <div className='bg-white relative w-full h-full top-15 lg:top-0 lg:h-[80vh] mx-0 lg:mx-[12rem] rounded-lg overflow-hidden flex flex-col items-center shadow-lg p-4'>
               <FaRegCircleCheck className='text-[10rem] mt-6 text-green-500' />
               <h2 className='font-bold text-2xl text-center py-4'>Order Successfull</h2>
               <p>You order #{Math.ceil(Math.random() * (999_999 - 100_000)) + 100_000} has been placed succesfully</p>
@@ -47,7 +47,7 @@ const Cart = () => {
           </div>
         }
         
-        <main className='grid grid-cols-[6fr_3fr] gap-6 flex-1 mx-[10rem] pb-[5rem]'>
+        <main className='grid grid-cols-1 lg:grid-cols-[6fr_3fr] gap-6 flex-1 mx-[2rem] lg:mx-[10rem] pb-[5rem]'>
             <div className=''>
               <CartItems />
             </div>
