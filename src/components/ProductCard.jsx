@@ -16,7 +16,7 @@ const ProductCard = ({ product, className }) => {
         </div>
         <div className='py-4 flex flex-col gap-2 px-4 flex-1'>
             <p className='text-md font-normal truncate'>{product?.title}</p>
-            <div className='flex justify-between items-center'>
+            <div className='flex flex-col md:flex-row md:justify-between md:items-center'>
                 {
                     product ? 
                         <>

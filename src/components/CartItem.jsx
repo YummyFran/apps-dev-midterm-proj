@@ -35,16 +35,16 @@ const CartItem = ({ item, selected, setSelected }) => {
             }
         </div>
         <div className='absolute top-2 right-0 cursor-pointer text-lg text-gray-400' onClick={() => removeFromCart(item.id)}>&times;</div>
-        <div className='h-30 w-40 bg-gray-200 py-2 rounded-md'>
+        <div className='h-40 bg-gray-200 py-2 rounded-md'>
             <img src={item.thumbnail} alt={item.title} className='w-full h-full object-contain'/>
         </div>
         <div className='flex flex-col flex-1'>
             <h3 className='font-bold text-md text-gray-700'>{item.title}</h3>
-            <p className='flex gap-1 items-center text-sm text-gray-500'>
-                {item.brand && (<><span>{item.brand}</span> <span>&#183;</span></>)}
+            <p className='flex flex-col md:flex-row gap-1 md:items-center text-sm text-gray-500'>
+                {item.brand && (<><span>{item.brand}</span> <span className='hidden md:inline'>&#183;</span></>)}
                 <span>{item.shippingInformation}</span>
             </p>
-            <div className='flex justify-between items-end mt-auto'>
+            <div className='flex flex-col md:flex-row justify-between gap-2 md:items-end mt-auto'>
                 <p className='font-bold text-xl text-gray-800'>${(item.subtotal).toFixed(2)}</p>
                 <div className="flex">
                 <button

@@ -165,9 +165,9 @@ const ProductPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-col md:flex-row gap-4 justify-between md:justify-start">
             <button
-              className="bg-gray-200 py-3 px-6 rounded-md flex items-center gap-2 text-gray-700 cursor-pointer hover:shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+              className="bg-gray-200 py-3 px-6 rounded-md flex justify-center items-center gap-2 text-gray-700 cursor-pointer hover:shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
               disabled={product?.stock <= 0}
               onClick={() => handleAddToCart()}
             >
@@ -181,7 +181,7 @@ const ProductPage = () => {
               )}
             </button>
             <button
-              className="bg-[#76bad1] py-3 px-6 rounded-md flex items-center gap-2 text-white cursor-pointer hover:shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+              className="bg-[#76bad1] py-3 px-6 rounded-md flex justify-center items-center gap-2 text-white cursor-pointer hover:shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
               disabled={product?.stock <= 0}
             >
               {product?.stock > 0 ? (

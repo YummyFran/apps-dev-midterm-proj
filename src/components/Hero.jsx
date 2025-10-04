@@ -9,7 +9,7 @@ const Hero = () => {
             <img src="/assets/hero.jpg" alt="hero" className='w-full h-full object-cover object-left'/>
 
             <div className='absolute bg-black inset-0 opacity-25'></div>
-            <div className="absolute text-white top-[50%] right-20 translate-y-[-50%] flex flex-col">
+            <div className="absolute text-white top-[50%] right-10 lg:right-20 translate-y-[-50%] flex flex-col">
                 <div className='text-6xl lg:text-[5rem] font-mono text-right'>Simple is More</div>
                 <Link to={'/browse'} className='hover:underline self-end flex gap-2 items-center'>Browse products <FaArrowRightLong /></Link>
             </div>
