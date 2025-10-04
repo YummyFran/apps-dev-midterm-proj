@@ -8,6 +8,8 @@ export function useCart() {
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([])
+  const [selected, setSelected] = useState([]);
+
 
   const addToCart = (item) => {
     setCart(item)
@@ -20,7 +22,7 @@ export function CartProvider({ children }) {
   const clearCart = () => setCart([])
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, selected, setSelected }}>
       {children}
     </CartContext.Provider>
   )
